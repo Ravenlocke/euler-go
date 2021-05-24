@@ -2,6 +2,6 @@ package euler
 
 import "fmt"
 
-func euler01() {
+func Euler01() {
 	fmt.Println("Hello world!")
 }
