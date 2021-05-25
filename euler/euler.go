@@ -3,6 +3,7 @@ package euler
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
 
 func is_palindrome(str string) bool {
@@ -17,6 +18,13 @@ func is_palindrome(str string) bool {
 func MaxI(a, b int) int {
 	if a < b {
 		return b
+	}
+	return a
+}
+
+func AbsI(a int) int {
+	if a < 1 {
+		return -a
 	}
 	return a
 }
@@ -142,4 +150,105 @@ func Euler05() int {
 		}
 	}
 	return result
+}
+
+func Euler06() int {
+	sum_square := 0
+	square_sum := 0
+
+	for i := 1; i <= 100; i++ {
+		sum_square += i * i
+		square_sum += i
+	}
+
+	square_sum *= square_sum
+
+	result := AbsI(square_sum - sum_square)
+	return result
+}
+
+func Euler07() int {
+	primes := []int{2}
+
+outer:
+	for counter := 3; true; counter++ {
+		for _, prime := range primes {
+			if counter%prime == 0 {
+				continue outer
+			}
+
+		}
+		primes = append(primes, counter)
+		if len(primes) == 10_001 {
+			break outer
+		}
+	}
+
+	return primes[10_000]
+
+}
+
+func Euler08() int {
+	number := `73167176531330624919225119674426574742355349194934
+	96983520312774506326239578318016984801869478851843
+	85861560789112949495459501737958331952853208805511
+	12540698747158523863050715693290963295227443043557
+	66896648950445244523161731856403098711121722383113
+	62229893423380308135336276614282806444486645238749
+	30358907296290491560440772390713810515859307960866
+	70172427121883998797908792274921901699720888093776
+	65727333001053367881220235421809751254540594752243
+	52584907711670556013604839586446706324415722155397
+	53697817977846174064955149290862569321978468622482
+	83972241375657056057490261407972968652414535100474
+	82166370484403199890008895243450658541227588666881
+	16427171479924442928230863465674813919123162824586
+	17866458359124566529476545682848912883142607690042
+	24219022671055626321111109370544217506941658960408
+	07198403850962455444362981230987879927244284909188
+	84580156166097919133875499200524063689912560717606
+	05886116467109405077541002256983155200055935729725
+	71636269561882670428252483600823257530420752963450
+	`
+
+	// Extract characters from the `number` string that are numbers and convert
+	// to int.
+	digits := `1234567890`
+	number_list := []int{}
+
+	for _, char := range number {
+		if strings.ContainsRune(digits, char) {
+			number_list = append(number_list, int(char)-48)
+		}
+	}
+
+	window_size := 13
+	n_windows := len(number_list) - window_size + 1
+	highest_product := 0
+
+	for i := 0; i < n_windows; i++ {
+		slice := number_list[i : i+window_size]
+		product := 1
+		for _, i := range slice {
+			product *= i
+		}
+		if product > highest_product {
+			highest_product = product
+		}
+	}
+
+	return highest_product
+}
+
+func Euler09() (int, error) {
+	for a := 1; a < 1_001; a++ {
+		for b := a + 1; b < (1_001 - a); b++ {
+			c := 1000 - (a + b)
+			if a*a+b*b == c*c {
+				return a * b * c, nil
+			}
+		}
+	}
+
+	return -1, errors.New("this should never be reached")
 }

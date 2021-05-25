@@ -63,3 +63,40 @@ func TestEuler05(t *testing.T) {
 		t.Errorf("Euler05() = %d; want %d", result, expected)
 	}
 }
+
+func TestEuler06(t *testing.T) {
+	expected := 25_164_150
+	result := Euler06()
+
+	if result != expected {
+		t.Errorf("Euler06() = %d; want %d", result, expected)
+	}
+}
+
+func TestEuler07(t *testing.T) {
+	expected := 104_743
+	result := Euler07()
+
+	if result != expected {
+		t.Errorf("Euler07() = %d; want %d", result, expected)
+	}
+}
+
+func TestEuler08(t *testing.T) {
+	expected := 23_514_624_000
+	result := Euler08()
+
+	if result != expected {
+		t.Errorf("Euler08() = %d; want %d", result, expected)
+	}
+}
+
+func TestEuler09(t *testing.T) {
+	expected := 31_875_000
+	result, _ := Euler09()
+
+	if result != expected {
+		t.Errorf("Euler09() = %d; want %d", result, expected)
+	}
+
+}
