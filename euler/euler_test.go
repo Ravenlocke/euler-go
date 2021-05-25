@@ -32,3 +32,34 @@ func TestEuler03(t *testing.T) {
 		t.Errorf("Euler03() = %d; want %d", result, expected)
 	}
 }
+
+func TestEuler04(t *testing.T) {
+	result := Euler04()
+	expected := 906_609
+
+	if result != expected {
+		t.Errorf("Euler04() = %d; want %d", result, expected)
+	}
+}
+
+func TestNewPrimeFactors(t *testing.T) {
+	expected := map[int]int{2: 2}
+	result := NewPrimeFactors(4)
+
+	for k, v := range result.Factors {
+		expected_v := expected[k]
+		if v != expected_v {
+			t.Errorf("NewPrimeFactors(4).Factors = %v; want %v", result.Factors, expected)
+		}
+
+	}
+}
+
+func TestEuler05(t *testing.T) {
+	expected := 232_792_560
+	result := Euler05()
+
+	if result != expected {
+		t.Errorf("Euler05() = %d; want %d", result, expected)
+	}
+}
